@@ -1,0 +1,27 @@
+{
+	"installed_packages":
+	[
+		"Package Control",
+		"Predawn",
+		"Emmet",
+		"EditorConfig",
+		"SublimeCodeIntel",
+		"AutoFileName",
+		"Autoprefixer",
+		"Can I Use",
+		"GhostText",
+		"Markdown Preview",
+		"SideBarEnhancements",
+		"SideBarGit",
+		"Terminal",
+		"BracketHighlighter",
+		"SublimeLinter",
+		"SublimeLinter-csslint",
+		"SublimeLinter-jshint",
+		"SublimeLinter-json"
+	],
+	"ignored_packages":
+	[
+		"LiveReload"
+	]
+}
