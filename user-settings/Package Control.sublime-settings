@@ -19,9 +19,5 @@
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
 		"SublimeLinter-json"
-	],
-	"ignored_packages":
-	[
-		"LiveReload"
 	]
 }
