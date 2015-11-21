@@ -1,12 +1,18 @@
 {
-	  // use the predawn theme for markdown
-    "color_scheme": "Packages/Predawn/predawn-markdown.tmTheme",
-    // Centers the column in the window
-    "draw_centered": true,
-    "draw_indent_guides": false,
-    "font_size": 15,
-    "trim_trailing_white_space_on_save": false,
-    "word_wrap": true,
-    // Sets the # of characters per line
-    "wrap_width": 80
+	 // Which file extensions go with this file type?
+	"extensions":
+	[
+    "md",
+    "mdown",
+  ],
+  // use the predawn theme for markdown
+  "color_scheme": "Packages/Predawn/predawn-markdown.tmTheme",
+  // Centers the column in the window
+  "draw_centered": true,
+  "draw_indent_guides": false,
+  "font_size": 15,
+  "trim_trailing_white_space_on_save": false,
+  "word_wrap": true,
+  // Sets the # of characters per line
+  "wrap_width": 80
 }
