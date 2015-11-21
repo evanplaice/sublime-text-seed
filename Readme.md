@@ -1,4 +1,4 @@
-# SublimeText3 Dev Stack Notes
+# Sublime Text 3 - Configuration
 
 The following is used to track the plugins, settings, and setup required to get build a producting dev toolstack.
 
@@ -30,6 +30,48 @@ Paste content with ```⇧ + ⌘ + v```
 
 ```⌘ + ^ + ↕```
 
+-----
+
+## General Settings
+
+*User-Settings*
+```json
+{
+	"highlight_modified_tabs": true,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": false,
+	"draw_white_space": "all",
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"ignored_packages": [
+		"Vintage"
+	]
+}
+```
+
+*Note: Tabs aren't translated to spaces automatically to avoid introducing unrelated changes to a commit while editing an existing codebase.*
+
+-----
+
+## Themes
+
+### [Predawn](https://packagecontrol.io/packages/Predawn)
+
+A stylish low-contrast theme.
+
+*User-Settings*
+```json
+{
+	"theme": "predawn-DEV.sublime-theme",
+	"color_scheme": "Packages/User/SublimeLinter/predawn (SL).tmTheme"
+}
+```
+
+-----
+
 ## Packages
 
 The editor that will be used is Sublime Text. While powerful on its own, the following list of add-ons will be required to unlock the full potential.
@@ -42,7 +84,7 @@ Package management to simplify the process of adding/removing modules.
 * Package Control: Install Package (pci)
 * Package Control: Remove Package (pcr)
 
-**Package Control.sublime-settings**
+*Package Control-Settings*
 ```json
 {
 	"installed_packages":
@@ -69,39 +111,9 @@ Package management to simplify the process of adding/removing modules.
 }
 ```
 
-### [Predawn](https://packagecontrol.io/packages/Predawn)
-
-A stylish low-contrast theme.
-
-**User-Settings**
-```json
-{
-	// predawn theme prerequisites
-	"theme": "predawn-DEV.sublime-theme",
-	"color_scheme": "Packages/User/SublimeLinter/predawn (SL).tmTheme",
-	// highlights modifications prior to a save
-	"highlight_modified_tabs": true,
-	// tab preferences
-	"tab_size": 2,
-	"translate_tabs_to_spaces": false,
-	// display indent guides
-	"indent_guide_options":
-	[
-		"draw_normal",
-		"draw_active"
-	],
-	// adjust the sidebar appearance
-	"sidebar_medium": true,
-	// adjust file tab appearance
-	"tabs_small": true
-	// disable vim-style editing
-	"ignored_packages": ["Vintage"]
-}
-```
-
 ### [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter)
 
-The base package required to enable code linting.
+The base package required to enable linting in SublimeText3
 
 ### [SublimeLinter-jshint](https://packagecontrol.io/packages/SublimeLinter-jshint)
 
@@ -126,6 +138,14 @@ JSON linting for Sublime Text.
 ### [SidebarEnhancements](https://packagecontrol.io/packages/SideBarEnhancements)
 
 Adds additional options to the sidebar.
+
+*User-Settings*
+```json
+{
+	"sidebar_medium": true,
+	"tabs_small": true
+}
+```
 
 ### [BracketHighlighter](https://packagecontrol.io/packages/BracketHighlighter)
 
@@ -175,6 +195,14 @@ Autocompletes filenames used in 'src' or 'href' attributes.
 Used to edit text fields in the browser directly in Sublime Text.
 
 Requires a Chrome Extension.
+
+### [LiveReload](https://packagecontrol.io/packages/GhostText) [Not Installed]
+
+Automatically reloads the browser when files are saved in SublimeText.
+
+Requires a Chrome Extension.
+
+*Note: Not available in Linux. Manual install to use in OSX.*
 
 ---------
 
