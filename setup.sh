@@ -38,6 +38,7 @@ elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 		wait %1
 		# prepare the sublime settings directory
 		mkdir ${ST3}
+		chown -R ${SUDO_USER}:${SUDO_USER} $ST3
 	fi
 fi
 
@@ -48,6 +49,7 @@ echo "------------------------"
 echo "Copying Themes..."
 mkdir -p "${ST3}/Installed Packages"
 cp -a ./themes/* "${ST3}/Installed Packages"
+chown -R ${SUDO_USER}:${SUDO_USER} "${ST3}/Installed Packages"
 echo "------------------------"
 
 echo "Installing Package Control..."
@@ -59,6 +61,7 @@ echo "Copying User Settings..."
 # prepare the 'Packages' directory
 mkdir -p "${ST3}/Packages/User"
 cp -a ./user-settings/* $ST3/Packages/User
+chown -R ${SUDO_USER}:${SUDO_USER} "${ST3}/Packages/User"
 echo "------------------------"
 
 exit 0
