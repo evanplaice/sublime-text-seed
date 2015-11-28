@@ -19,6 +19,11 @@ if platform == 'Windows':
 
   sys.exit(0)
 
+else:
+  raise Exception('Operating system not supported');
+  sys.exit(1)
+
+
 def isInstalled(platform):
 
   if platform == 'Darwin':
