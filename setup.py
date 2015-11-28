@@ -14,14 +14,16 @@ def main():
     app_path = '/Applications/Sublime Text.app'
     # TODO: test this in OSX
     config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3'
-    is_installed(app_path);
+    if not is_installed(app_path):
+      install_osx()
     sys.exit(0)
 
   if platform == 'Linux':
     print('Linux detected...')
     app_path = 'sublime-text'
     config_path = os.path.expanduser('~') + '/.config/sublime-text-3'
-    is_installed(app_path);
+    if not is_installed(app_path):
+      install_linux(app_path)
     sys.exit(0)
 
   if platform == 'Windows':
@@ -30,7 +32,8 @@ def main():
     # app_path = ''
     # TODO: do a windows instal to determine the default config location
     # config_path = ''
-    is_installed(app_path);
+    if not is_installed(app_path):
+      install_windows(app_path)
     sys.exit(0)
 
   else:
@@ -46,6 +49,17 @@ def is_installed(app_path):
   except OSError as e:
     print('Sublime not installed...')
     return False
+
+def install_osx(app_path):
+  # TODO: implement OSX installation
+  return
+
+def install_linux(app_path):
+  # TODO: implement Linux installation
+
+def install_windows(app_path):
+  # TODO: implement Windows installation
+  return
 
 if __name__ == '__main__':
   main()
