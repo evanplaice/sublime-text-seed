@@ -1,21 +1,26 @@
 import platform
 import sys
+import os
 import subprocess
 
 platform = platform.system()
 app_path = ''
+config_path = ''
 
 def main():
   if platform == 'Darwin':
     print('OSX detected')
     # TODO: test this in OSX
     app_path = '/Applications/Sublime Text.app'
+    # TODO: test this in OSX
+    config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3'
     is_installed(app_path);
     sys.exit(0)
 
   if platform == 'Linux':
     print('Linux detected...')
     app_path = 'sublime-text'
+    config_path = os.path.expanduser('~') + '/.config/sublime-text-3'
     is_installed(app_path);
     sys.exit(0)
 
@@ -23,6 +28,8 @@ def main():
     print('Windows detected...')
     # TODO: do a windows instal to determine the default install location
     # app_path = ''
+    # TODO: do a windows instal to determine the default config location
+    # config_path = ''
     is_installed(app_path);
     sys.exit(0)
 
