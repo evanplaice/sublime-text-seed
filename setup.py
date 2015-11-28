@@ -57,9 +57,9 @@ def install_osx(app_path):
 def install_linux(app_path):
   try:
     print('Updating apt-get...')
-    subprocess.call(['apt-get', 'update'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.call(['apt-get', 'update'], stdout=subprocess.PIPE)
     print('Installing Sublime Text...')
-    subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
     print('Installation complete...')
 
   except OSError as e:
