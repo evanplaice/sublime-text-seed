@@ -39,7 +39,7 @@ Paste content with ```⇧ + ⌘ + v```
 {
 	"highlight_modified_tabs": true,
 	"tab_size": 2,
-	"translate_tabs_to_spaces": false,
+	"translate_tabs_to_spaces": true,
 	"draw_white_space": "all",
 	"indent_guide_options":
 	[
