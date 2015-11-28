@@ -55,7 +55,17 @@ def install_osx(app_path):
   return
 
 def install_linux(app_path):
-  # TODO: implement Linux installation
+  try:
+    print('Updating apt-get...')
+    subprocess.call(['apt-get', 'update'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print('Installing Sublime Text...')
+    subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print('Installation complete...')
+
+  except OSError as e:
+    print('Install failed:')
+    print(e)
+    sys.exit(1)
 
 def install_windows(app_path):
   # TODO: implement Windows installation
