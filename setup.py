@@ -20,7 +20,7 @@ def main():
 
   if platform == 'Linux':
     print('Linux detected...')
-    app_path = 'sublime-text'
+    app_path = 'sublime'
     config_path = os.path.expanduser('~') + '/.config/sublime-text-3'
     if not is_installed(app_path):
       install_linux(app_path)
