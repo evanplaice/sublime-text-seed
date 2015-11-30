@@ -16,6 +16,7 @@ def main():
     config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3'
     if not is_installed(app_path):
       install_osx()
+    config_osx(config_path)
     sys.exit(0)
 
   if platform == 'Linux':
@@ -24,6 +25,7 @@ def main():
     config_path = os.path.expanduser('~') + '/.config/sublime-text-3'
     if not is_installed(app_path):
       install_linux(app_path)
+    config_linux(config_path)
     sys.exit(0)
 
   if platform == 'Windows':
@@ -34,6 +36,7 @@ def main():
     # config_path = ''
     if not is_installed(app_path):
       install_windows(app_path)
+    config_windows(config_path)
     sys.exit(0)
 
   else:
@@ -54,6 +57,10 @@ def install_osx(app_path):
   # TODO: implement OSX installation
   return
 
+def config_osx(config_path):
+  # TODO: implement OSX config
+  return
+
 def install_linux(app_path):
   try:
     print('Updating apt-get...')
@@ -67,8 +74,16 @@ def install_linux(app_path):
     print(e)
     sys.exit(1)
 
+def config_linux(config_path):
+  # TODO: implement Linux config
+  return
+
 def install_windows(app_path):
   # TODO: implement Windows installation
+  return
+
+def config_windows(config_path):
+  # TODO: implement Windows config
   return
 
 if __name__ == '__main__':
