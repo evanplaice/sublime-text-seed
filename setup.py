@@ -1,6 +1,7 @@
 import platform
 import sys
 import os
+import signal
 import subprocess
 
 platform = platform.system()
@@ -45,7 +46,8 @@ def main():
 
 def is_installed(app_path):
   try:
-    subprocess.call([app_path]);
+    p = subprocess.Popen(app_path)
+    os.kill(p.pid, signal.SIGTERM)
     print('Sublime is installed...')
     return True
 
