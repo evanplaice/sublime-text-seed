@@ -12,11 +12,11 @@ def main():
   if platform == 'Darwin':
     print('OSX detected')
     # TODO: test this in OSX
-    app_path = '/Applications/Sublime Text.app'
+    app_path = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
     # TODO: test this in OSX
     config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3'
     if not is_installed(app_path):
-      install_osx()
+      install_osx(app_path)
     config_osx(config_path)
     sys.exit(0)
 
