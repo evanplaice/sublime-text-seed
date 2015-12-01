@@ -21,6 +21,7 @@ def main():
     app_path = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
     config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime\ Text\ 3' # TODO: test this in OSX
     if not is_installed(app_path):
+      print('Sublime not installed...')
       install_osx(app_path)
     config_osx(config_path)
     sys.exit(0)
@@ -32,6 +33,7 @@ def main():
     app_path = 'sublime'
     config_path = os.path.expanduser('~') + '/.config/sublime-text-3'
     if not is_installed(app_path):
+      print('Sublime not installed...')
       install_linux(app_path)
     config_linux(config_path)
     sys.exit(0)
@@ -45,6 +47,7 @@ def main():
     # TODO: do a windows install to determine the default config location
     # config_path = ''
     if not is_installed(app_path):
+      print('Sublime not installed...')
       install_windows(app_path)
     config_windows(config_path)
     sys.exit(0)
@@ -58,10 +61,8 @@ def is_installed(app_path):
   try:
     p = subprocess.Popen(app_path)
     os.kill(p.pid, signal.SIGTERM)
-    print('Sublime is installed...')
     return True
   except OSError as e:
-    print('Sublime not installed...')
     return False
 
 
@@ -123,7 +124,7 @@ def config_osx(config_path):
   copytree('./themes', packages)
   # copy the user preferences
   copytree('./user-settings', settings)
-  print('Installation complete...')
+  print('Configuration complete...')
 
 
 # Linux installation instructions
