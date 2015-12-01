@@ -59,7 +59,7 @@ def main():
 # Check to see if an application is installed
 def is_installed(app_path):
   try:
-    p = subprocess.Popen(app_path)
+    p = subprocess.Popen(app_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     os.kill(p.pid, signal.SIGTERM)
     return True
   except OSError as e:
