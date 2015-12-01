@@ -130,7 +130,7 @@ def install_linux(app_path):
     subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
     print('Installation complete...')
   except OSError as e:
-    print('Install failed:' + e)
+    print('Install failed:' + e.message)
     sys.exit(1)
 
 
