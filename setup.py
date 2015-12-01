@@ -107,7 +107,7 @@ def install_osx(app_path):
     subprocess.Popen('ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime')
     print('Installation complete...')
   except Exception as e:
-    print('Install failed:' + e.message)
+    print('Install failed:' + str(e))
     sys.exit(1)
 
 
@@ -135,7 +135,7 @@ def install_linux(app_path):
     subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
     print('Installation complete...')
   except OSError as e:
-    print('Install failed:' + e.message)
+    print('Install failed:' + str(e))
     sys.exit(1)
 
 
