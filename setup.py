@@ -8,17 +8,22 @@ platform = platform.system()
 app_path = ''
 config_path = ''
 
+# the application main entry point
 def main():
+  # OSX Setup:
+  # - check and install via `brew cask`
+  # - copy configuration to '/Library/Application Support/Sublime Text 3'
   if platform == 'Darwin':
     print('OSX detected')
-    # TODO: test this in OSX
     app_path = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
-    # TODO: test this in OSX
-    config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3'
+    config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3' # TODO: test this in OSX
     if not is_installed(app_path):
       install_osx(app_path)
     config_osx(config_path)
     sys.exit(0)
+  # Linux Setup:
+  # - check and install via `brew cask`
+  # - copy configuration to '~/.config/sublime-text-3'
   if platform == 'Linux':
     print('Linux detected...')
     app_path = 'sublime'
@@ -27,11 +32,14 @@ def main():
       install_linux(app_path)
     config_linux(config_path)
     sys.exit(0)
+  # Windows Setup:
+  # - check and notify user to install
+  # - copy configuration to '%APPDATA%\Sublime Text 3'
   if platform == 'Windows':
     print('Windows detected...')
-    # TODO: do a windows instal to determine the default install location
+    # TODO: do a windows install to determine the default install location
     # app_path = ''
-    # TODO: do a windows instal to determine the default config location
+    # TODO: do a windows install to determine the default config location
     # config_path = ''
     if not is_installed(app_path):
       install_windows(app_path)
@@ -42,6 +50,7 @@ def main():
     sys.exit(1)
 
 
+# Check to see if an application is installed
 def is_installed(app_path):
   try:
     p = subprocess.Popen(app_path)
@@ -53,6 +62,7 @@ def is_installed(app_path):
     return False
 
 
+# OSX installation instructions
 def install_osx(app_path):
   try:
     print('Updating sources...')
@@ -68,34 +78,38 @@ def install_osx(app_path):
     sys.exit(1)
 
 
+# OSX configuration instructions
 def config_osx(config_path):
   # TODO: implement OSX config
   return
 
 
+# Linux installation instructions
 def install_linux(app_path):
   try:
-    print('Updating apt-get...')
+    print('Updating sources...')
     subprocess.call(['apt-get', 'update'], stdout=subprocess.PIPE)
     print('Installing Sublime Text...')
     subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
     print('Installation complete...')
   except OSError as e:
-    print('Install failed:')
-    print(e)
+    print('Install failed:' + e)
     sys.exit(1)
 
 
+# Linux configuration instructions
 def config_linux(config_path):
   # TODO: implement Linux config
   return
 
 
+# Windows installation instructions
 def install_windows(app_path):
   # TODO: implement Windows installation
   return
 
 
+# Windows configuration instructions
 def config_windows(config_path):
   # TODO: implement Windows config
   return
