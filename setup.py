@@ -3,6 +3,9 @@ import sys
 import os
 import signal
 import subprocess
+import errno
+import shutil
+
 
 platform = platform.system()
 app_path = ''
@@ -16,7 +19,7 @@ def main():
   if platform == 'Darwin':
     print('OSX detected')
     app_path = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
-    config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3' # TODO: test this in OSX
+    config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime\ Text\ 3' # TODO: test this in OSX
     if not is_installed(app_path):
       install_osx(app_path)
     config_osx(config_path)
@@ -62,6 +65,27 @@ def is_installed(app_path):
     return False
 
 
+# create a directory if it doesn't already exist
+def make_dir(dir):
+  try:
+    os.makedirs(dir)
+  # capture any non-file-creation errors
+  except OSError as exception:
+    if exception.errno != errno.EEXIST:
+      raise
+
+
+# recursively copies all the files in a directory
+def copytree(src, dst, symlinks=False, ignore=None):
+  for item in os.listdir(src):
+    s = os.path.join(src, item)
+    d = os.path.join(dst, item)
+    if os.path.isdir(s):
+      shutil.copytree(s, d, symlinks, ignore)
+    else:
+      shutil.copy2(s, d)
+
+
 # OSX installation instructions
 def install_osx(app_path):
   try:
@@ -84,8 +108,17 @@ def install_osx(app_path):
 
 # OSX configuration instructions
 def config_osx(config_path):
-  # TODO: implement OSX config
-  return
+  packages = config_path + '/Installed\ Packages'
+  settings = config_path + '/Packages/User'
+  # create the settings directories
+  make_dir(config_path)
+  make_dir(packages)
+  make_dir(settings)
+  # copy the themes
+  copytree('./themes', packages)
+  # copy the user preferences
+  copytree('./user-settings', settings)
+  print('Installation complete...')
 
 
 # Linux installation instructions
