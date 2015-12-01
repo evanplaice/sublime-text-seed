@@ -95,11 +95,11 @@ def copytree(src, dst, symlinks=False, ignore=None):
 def install_osx(app_path):
   try:
     print('Updating sources...')
-    if not is_installed('brew cask'):
-      raise NotInstalledError('Homebrew not installed...')
+    if not is_installed('brew'):
+      raise NotInstalledError('Error: Homebrew required to install Sublime Text.')
     subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
     if not is_installed('brew cask'):
-      raise NotInstalledError('Brew Cask not installed...')
+      raise NotInstalledError('Error: Homebrew Cask required to install Sublime Text.')
     print('Installing Sublime Text...')
     os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
     subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE)
