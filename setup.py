@@ -153,7 +153,7 @@ def config_windows(config_path):
 
 
 class NotInstalledError(Exception):
-    def __init__(self, message, errors):
+    def __init__(self, message):
         # Call the base class constructor
         super(ValidationError, self).__init__(message)
 
