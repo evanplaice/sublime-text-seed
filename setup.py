@@ -66,16 +66,18 @@ def is_installed(app_path):
 def install_osx(app_path):
   try:
     print('Updating sources...')
+    if not is_installed('brew cask'):
+      raise NotInstalledError('Homebrew not installed...')
     subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
-    #if not is_installed('brew cask'):
-    #  raise NotInstalledError('Brew Cask')
+    if not is_installed('brew cask'):
+      raise NotInstalledError('Brew Cask not installed...')
     print('Installing Sublime Text...')
     os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
     subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE)
     # symlink to 'sublime'
     subprocess.Popen('ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime')
     print('Installation complete...')
-  except OSError as e:
+  except Exception as e:
     print('Install failed:' + e)
     sys.exit(1)
 
