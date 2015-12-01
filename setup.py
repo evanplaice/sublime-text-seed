@@ -56,8 +56,18 @@ def is_installed(app_path):
     return False
 
 def install_osx(app_path):
-  # TODO: implement OSX installation
-  return
+  try:
+    print('Updating sources...')
+    subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
+    print('Installing Sublime Text...')
+    os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
+    subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE)
+    print('Installation complete...')
+
+  except OSError as e:
+    print('Install failed:' + e)
+    sys.exit(1)
+
 
 def config_osx(config_path):
   # TODO: implement OSX config
