@@ -59,6 +59,8 @@ def install_osx(app_path):
   try:
     print('Updating sources...')
     subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
+    #if not is_installed('brew cask'):
+    #  raise NotInstalledError('Brew Cask')
     print('Installing Sublime Text...')
     os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
     subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE)
@@ -97,6 +99,12 @@ def install_windows(app_path):
 def config_windows(config_path):
   # TODO: implement Windows config
   return
+
+class NotInstalledError(Exception):
+  def __init__(self, value):
+    self.value = value
+  def __str__(self):
+    return repr(self.value)
 
 if __name__ == '__main__':
   main()
