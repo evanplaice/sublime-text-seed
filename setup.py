@@ -19,7 +19,6 @@ def main():
       install_osx(app_path)
     config_osx(config_path)
     sys.exit(0)
-
   if platform == 'Linux':
     print('Linux detected...')
     app_path = 'sublime'
@@ -28,7 +27,6 @@ def main():
       install_linux(app_path)
     config_linux(config_path)
     sys.exit(0)
-
   if platform == 'Windows':
     print('Windows detected...')
     # TODO: do a windows instal to determine the default install location
@@ -39,10 +37,10 @@ def main():
       install_windows(app_path)
     config_windows(config_path)
     sys.exit(0)
-
   else:
     raise Exception('Operating system not supported');
     sys.exit(1)
+
 
 def is_installed(app_path):
   try:
@@ -50,10 +48,10 @@ def is_installed(app_path):
     os.kill(p.pid, signal.SIGTERM)
     print('Sublime is installed...')
     return True
-
   except OSError as e:
     print('Sublime not installed...')
     return False
+
 
 def install_osx(app_path):
   try:
@@ -65,7 +63,6 @@ def install_osx(app_path):
     os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
     subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE)
     print('Installation complete...')
-
   except OSError as e:
     print('Install failed:' + e)
     sys.exit(1)
@@ -75,6 +72,7 @@ def config_osx(config_path):
   # TODO: implement OSX config
   return
 
+
 def install_linux(app_path):
   try:
     print('Updating apt-get...')
@@ -82,29 +80,34 @@ def install_linux(app_path):
     print('Installing Sublime Text...')
     subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
     print('Installation complete...')
-
   except OSError as e:
     print('Install failed:')
     print(e)
     sys.exit(1)
 
+
 def config_linux(config_path):
   # TODO: implement Linux config
   return
+
 
 def install_windows(app_path):
   # TODO: implement Windows installation
   return
 
+
 def config_windows(config_path):
   # TODO: implement Windows config
   return
 
+
 class NotInstalledError(Exception):
   def __init__(self, value):
     self.value = value
+
   def __str__(self):
     return repr(self.value)
+
 
 if __name__ == '__main__':
   main()
