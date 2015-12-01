@@ -76,12 +76,17 @@ def make_dir(dir):
 
 
 # recursively copies all the files in a directory
+#  required because shutil.copytree (sucks) can't overwrite directories
 def copytree(src, dst, symlinks=False, ignore=None):
   for item in os.listdir(src):
     s = os.path.join(src, item)
     d = os.path.join(dst, item)
     if os.path.isdir(s):
-      shutil.copytree(s, d, symlinks, ignore)
+      try:
+        shutil.copytree(s, d, symlinks, ignore)
+      except OSError as exception:
+        if exception.errno != errno.EEXIST:
+          raise
     else:
       shutil.copy2(s, d)
 
