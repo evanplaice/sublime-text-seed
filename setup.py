@@ -142,8 +142,17 @@ def install_linux(app_path):
 
 # Linux configuration instructions
 def config_linux(config_path):
-  # TODO: implement Linux config
-  return
+  packages = config_path + '/Installed Packages'
+  settings = config_path + '/Packages/User'
+  # create the settings directories
+  make_dir(config_path)
+  make_dir(packages)
+  make_dir(settings)
+  # copy the themes
+  copytree('./themes', packages)
+  # copy the user preferences
+  copytree('./user-settings', settings)
+  print('Configuration complete...')
 
 
 # Windows installation instructions
