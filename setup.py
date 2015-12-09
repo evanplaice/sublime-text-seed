@@ -26,7 +26,7 @@ def main():
     config_osx(config_path)
     sys.exit(0)
   # Linux Setup:
-  # - check and install via `brew cask`
+  # - check and install via `apt-get`
   # - copy configuration to '~/.config/sublime-text-3'
   if platform == 'Linux':
     print('Linux detected...')
