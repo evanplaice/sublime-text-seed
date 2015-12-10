@@ -5,6 +5,7 @@ import signal
 import subprocess
 import errno
 import shutil
+import urllib2
 
 
 platform = platform.system()
@@ -92,6 +93,17 @@ def copytree(src, dst, symlinks=False, ignore=None):
       shutil.copy2(s, d)
 
 
+def install_package_control(config_path):
+  path = config_path + '/Installed Packages/Package Control.sublime-package'
+  url = 'http://sublime.wbond.net/Package%20Control.sublime-package'
+  response = urllib2.urlopen(url)
+  CHUNK = 16 * 1024
+  with open(path, 'wb') as f:
+   while True:
+      chunk = response.read(CHUNK)
+      if not chunk: break
+      f.write(chunk)
+
 # OSX installation instructions
 def install_osx(app_path):
   try:
@@ -130,10 +142,11 @@ def config_osx(config_path):
 # Linux installation instructions
 def install_linux(app_path):
   try:
+    subprocess.call(['sudo', 'id', '-nu'], stdout=subprocess.PIPE)
     print('Updating sources...')
-    subprocess.call(['apt-get', 'update'], stdout=subprocess.PIPE)
+    subprocess.call(['sudo', 'apt-get', 'update'], stdout=subprocess.PIPE)
     print('Installing Sublime Text...')
-    subprocess.call(['apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
+    subprocess.call(['sudo', 'apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
     print('Installation complete...')
   except OSError as e:
     print(e)
@@ -148,6 +161,8 @@ def config_linux(config_path):
   make_dir(config_path)
   make_dir(packages)
   make_dir(settings)
+  print('Installing Package Control...')
+  install_package_control(config_path)
   # copy the themes
   copytree('./themes', packages)
   # copy the user preferences
