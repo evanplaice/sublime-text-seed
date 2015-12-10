@@ -1,4 +1,4 @@
-# Custom Sublime Text Seed
+# Sublime Text Seed
 
 Automated installation + configuration of Sublime Text in OSX, Linux, and Windows.
 
