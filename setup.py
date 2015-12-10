@@ -134,6 +134,8 @@ def config_osx(config_path):
   make_dir(config_path)
   make_dir(packages)
   make_dir(settings)
+  # install 'Package Control'
+  install_package_control(config_path)
   # copy the themes
   copytree('./themes', packages)
   # copy the user preferences
