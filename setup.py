@@ -163,7 +163,7 @@ def config_linux(config_path):
   make_dir(config_path)
   make_dir(packages)
   make_dir(settings)
-  print('Installing Package Control...')
+  # install 'Package Control'
   install_package_control(config_path)
   # copy the themes
   copytree('./themes', packages)
@@ -183,7 +183,7 @@ def config_windows(config_path):
   # TODO: implement Windows config
   return
 
-
+# Custom exception, indicates that a dependency is not installed
 class NotInstalledError(Exception):
   pass
 
