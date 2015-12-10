@@ -1,6 +1,21 @@
-# Sublime Text 3 - Configuration
+# Custom Sublime Text Seed
 
-The following is used to track the plugins, settings, and setup required to get build a producting dev toolstack.
+Automated installation + configuration of Sublime Text in OSX, Linux, and Windows.
+
+**This package includes**:
+
+- Sublime Text 3
+- Plugins
+- Themes
+- Configuration
+
+## Usage
+
+Install Sublime Text + Configuration with the following:
+
+```bash
+./setup.py
+```
 
 ## Workflows
 
@@ -8,27 +23,27 @@ A selection of shortcuts or key combinations that help to speed up workflow in S
 
 **Multiple Cursor Selection**
 
-Hold ```⌘``` while dropping cursors or drag while holding ```⌘ + ⌥```
+Hold `⌘` while dropping cursors or drag while holding `⌘ + ⌥`
 
-Use ```^ + ⇧ + w``` to wrap the selection in a tag
+Use `^ + ⇧ + w` to wrap the selection in a tag
 
-To wrap with Emmet use ```^ + w```
+To wrap with Emmet use `^ + w`
 
 **Paste with tab formatting**
 
-Paste content with ```⇧ + ⌘ + v```
+Paste content with `⇧ + ⌘ + v`
 
 **Go to file**
 
-```⌘ + p```
+`⌘ + p`
 
 **Go to symbol**
 
-```⌘ + r```
+`⌘ + r`
 
 **Line Bubbling**
 
-```⌘ + ^ + ↕```
+`⌘ + ^ + ↕`
 
 -----
 
@@ -52,7 +67,7 @@ Paste content with ```⇧ + ⌘ + v```
 }
 ```
 
-*Note: Tabs aren't translated to spaces automatically to avoid introducing unrelated changes to a commit while editing an existing codebase.*
+*Note: Tabs aren't translated to spaces by default to avoid introducing unrelated changes to a commit while editing preexisting codebases.*
 
 -----
 
@@ -121,7 +136,9 @@ JavaScript linting for Sublime Text.
 
 Requires jshint to be installed via NPM (Node Package Manager).
 
-```sudo npm install -g jshint```
+```bash
+sudo npm install -g jshint
+```
 
 ### [SublimeLinter-csslint](https://packagecontrol.io/packages/SublimeLinter-csslint)
 
@@ -129,7 +146,9 @@ CSS linting for Sublime Text.
 
 Requires csslint to be installed via NPM (Node Package Manager).
 
-```sudo npm install -g csslint```
+```bash
+sudo npm install -g csslint
+```
 
 ### [SublimeLinter-json](https://packagecontrol.io/packages/JSONLint)
 
@@ -155,8 +174,6 @@ Displays matching brackets to the left of the line numbers. Useful for navigatin
 
 Used to quickly scaffold html using a shorthand syntax.
 
-Requires NodeJS:csslint
-
 ### [AutoPrefixer](https://packagecontrol.io/packages/Autoprefixer)
 
 Automatically adds CSS prefixes required cross browser compatibility.
@@ -165,7 +182,7 @@ Automatically adds CSS prefixes required cross browser compatibility.
 
 Used to look up a tag's compatibility.
 
-Triggered via ```^ + ⌥ + f```
+Triggered via `^ + ⌥ + f`
 
 ### [CodeIntel](https://packagecontrol.io/packages/SublimeCodeIntel)
 
@@ -179,6 +196,7 @@ Launch a terminal window from inside Sublime Text.
 
 Launch a browser tab to preview Markdown from Sublime Text.
 
+Available via the command menu (ie `⌘ + ⇧ + p`)
 
 ### [EditorConfig](https://packagecontrol.io/packages/EditorConfig)
 
@@ -211,7 +229,7 @@ Requires a Chrome Extension.
 * HTML5Snippets
 * SidebarEnhancements?
 * ColorHighlighter?
-* ColorPicker? ```⌘ + ⇧ + c```
+* ColorPicker? `⌘ + ⇧ + c`
 * LiveStyle
 * GitGutter
 * Expand to Quotes
