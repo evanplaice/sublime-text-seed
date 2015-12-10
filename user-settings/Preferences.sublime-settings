@@ -7,7 +7,7 @@
 	"tab_size": 2,
 	// off by default to avoid polluting history during committs
 	"translate_tabs_to_spaces": true,
-	"draw_white_space": "all",
+	// "draw_white_space": "all",
 	"indent_guide_options":
 	[
 		"draw_normal",
