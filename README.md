@@ -1,53 +1,41 @@
+**NOTICE: Windows support is currently WIP (work-in-progress)**
+
 # Sublime Text Seed
 
 Automated installation + configuration of Sublime Text in OSX, Linux, and Windows.
 
-**This package includes**:
+The setup script loads a 'seed' configuration. Meaning, it provides a quick/easy path for new and existing `Sublime Text` users to quickly get up and running.
 
-- Sublime Text 3
-- Plugins
-- Themes
-- Configuration
+*This package:*
 
-## Usage
+ 1. Installs `Sublime Text 3`
+ 2. Installs `Package Control`
+ 3. `./themes` -> Loads Themes
+ 4. `./user-settings` -> Loads Configuration files
+ 5. `./license` -> Loads License
 
-Install Sublime Text + Configuration with the following:
+The setup script works transparently across all platforms by leveraging python as well as OS-specific package managers.
+
+
+# Usage
+
+Run the following to install and config `Sublime Text`
 
 ```bash
 ./setup.py
 ```
 
-## Workflows
+Restart the editor when prompted to do so. To view the package installation progress open the `Sublime Text` console.
 
-A selection of shortcuts or key combinations that help to speed up workflow in Sublime Text.
+*Note: This WILL overwrite the existing configuration but it will prompt before replacing the license.*
 
-**Multiple Cursor Selection**
 
-Hold `⌘` while dropping cursors or drag while holding `⌘ + ⌥`
+# Configuration
 
-Use `^ + ⇧ + w` to wrap the selection in a tag
+A default configuration is included with this package. Feel free to fork the project and add your own custom configuration.
 
-To wrap with Emmet use `^ + w`
 
-**Paste with tab formatting**
-
-Paste content with `⇧ + ⌘ + v`
-
-**Go to file**
-
-`⌘ + p`
-
-**Go to symbol**
-
-`⌘ + r`
-
-**Line Bubbling**
-
-`⌘ + ^ + ↕`
-
------
-
-## General Settings
+# General Settings
 
 *User-Settings*
 ```json
@@ -69,7 +57,6 @@ Paste content with `⇧ + ⌘ + v`
 
 *Note: Tabs aren't translated to spaces by default to avoid introducing unrelated changes to a commit while editing preexisting codebases.*
 
------
 
 ## Themes
 
@@ -85,19 +72,18 @@ A stylish low-contrast theme.
 }
 ```
 
------
 
 ## Packages
 
-The editor that will be used is Sublime Text. While powerful on its own, the following list of add-ons will be required to unlock the full potential.
+Sublime Text is powerful on its own but the following add-ons unlock the full potential.
 
 ### [Package Control](https://packagecontrol.io/)
 
 Package management to simplify the process of adding/removing modules.
 
 **Common Commands**
-* Package Control: Install Package (pci)
-* Package Control: Remove Package (pcr)
+* Package Control: Install Package (`Command Palette + p + c + i`)
+* Package Control: Remove Package (`Command Palette + p + c + r`)
 
 *Package Control-Settings*
 ```json
@@ -126,9 +112,13 @@ Package management to simplify the process of adding/removing modules.
 }
 ```
 
+## Package Details
+
 ### [SublimeLinter](https://packagecontrol.io/packages/SublimeLinter)
 
-The base package required to enable linting in SublimeText3
+Base package required to enable linting in SublimeText3.
+
+*Note: Since the 3.x release of `Sublime Text`, SublimeLinter no longer includes linters for specific languages by default.*
 
 ### [SublimeLinter-jshint](https://packagecontrol.io/packages/SublimeLinter-jshint)
 
@@ -158,6 +148,8 @@ JSON linting for Sublime Text.
 
 Adds additional options to the sidebar.
 
+The following settings are included to improve the look-and-feel.
+
 *User-Settings*
 ```json
 {
@@ -168,7 +160,9 @@ Adds additional options to the sidebar.
 
 ### [BracketHighlighter](https://packagecontrol.io/packages/BracketHighlighter)
 
-Displays matching brackets to the left of the line numbers. Useful for navigating complex code with multiple layers of nesting.
+Displays matching brackets to the left of the line numbers.
+
+Useful for navigating complex code with multiple layers of nesting.
 
 ### [Emmet](https://packagecontrol.io/packages/Emmet)
 
@@ -182,7 +176,7 @@ Automatically adds CSS prefixes required cross browser compatibility.
 
 Used to look up a tag's compatibility.
 
-Triggered via `^ + ⌥ + f`
+Triggered via `^ + ⌥ + f` | `CTRL + ALT + f`
 
 ### [CodeIntel](https://packagecontrol.io/packages/SublimeCodeIntel)
 
@@ -196,13 +190,17 @@ Launch a terminal window from inside Sublime Text.
 
 Launch a browser tab to preview Markdown from Sublime Text.
 
-Available via the command menu (ie `⌘ + ⇧ + p`)
+Available via the Command Palette (ie `⌘ + ⇧ + p` | `SUPER + SHIFT + p`)
+
+Use `Command Palette + m + b + p` as a shortcut to quickly preview a Markdown file in the browser.
 
 ### [EditorConfig](https://packagecontrol.io/packages/EditorConfig)
 
 Maintain consistent code formatting/style across multiple editors and developers.
 
-Configured via adding a .editorconfig file to a project.
+Configured by including an `.editorconfig` file the project root.
+
+To determine which settings to use see the [Official Documentation](http://editorconfig.org/).
 
 ### [AutoFilename](https://packagecontrol.io/packages/AutoFileName)
 
@@ -212,6 +210,8 @@ Autocompletes filenames used in 'src' or 'href' attributes.
 
 Used to edit text fields in the browser directly in Sublime Text.
 
+Select a textarea, start the plugin in Chrome, and code edited directly in `Sublime Text` will be reflected in the textarea.
+
 Requires a Chrome Extension.
 
 ### [LiveReload](https://packagecontrol.io/packages/GhostText) [Not Installed]
@@ -220,18 +220,4 @@ Automatically reloads the browser when files are saved in SublimeText.
 
 Requires a Chrome Extension.
 
-*Note: Not available in Linux. Manual install to use in OSX.*
-
----------
-
-**Plugins worth trying in the future:**
-
-* HTML5Snippets
-* SidebarEnhancements?
-* ColorHighlighter?
-* ColorPicker? `⌘ + ⇧ + c`
-* LiveStyle
-* GitGutter
-* Expand to Quotes
-* ES6 Syntax Highlighting
-* CSS3 Syntax Hightlighting
+*Note: Not available in Linux or Windows. Install manually via `Package Control` to use in OSX.*
