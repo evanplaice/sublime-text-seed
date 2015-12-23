@@ -175,8 +175,14 @@ def config_linux(config_path):
 
 # Windows installation instructions
 def install_windows(app_path):
-  # TODO: implement Windows installation
-  return
+  print('Installing Sublime')
+  try:
+    if not is_installed(['chocolatey']):
+      raise NotInstalledError('Error: Chocolatey required to install Sublime Text.')
+    p = subprocess.Popen(['choco', 'install', '-y', 'sublimetext3'])
+  except OSError as e:
+    print(e)
+    sys.exit(1)
 
 
 # Windows configuration instructions
