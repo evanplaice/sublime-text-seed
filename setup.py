@@ -114,9 +114,8 @@ def install_osx(app_path):
     subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
     print('Installing Sublime Text...')
     os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
-    subprocess.call(['brew', 'install', 'caskroom/cask/brew-cask'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    subprocess.call(['brew', 'tap', 'caskroom/versions'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.call(['brew', 'tap', 'caskroom/versions'])
+    subprocess.call(['brew', 'cask', 'install', 'sublime-text3'])
     # symlink to 'sublime'
     subprocess.Popen(['ln', '-s', install_path, '/usr/local/bin/sublime'])
     print('Installation complete...')
