@@ -70,7 +70,7 @@ def install_osx(app_path):
     subprocess.call(['brew', 'tap', 'caskroom/versions'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     # symlink to 'sublime'
-    subprocess.Popen(['ln', '-s', install_path, '/usr/local/bin/sublime'])
+    subprocess.Popen(['ln', '-s', install_path, '/usr/local/bin/sublime'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print('Installation complete...')
   except Exception as e:
     print(e)
