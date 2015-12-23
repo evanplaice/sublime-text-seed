@@ -46,7 +46,7 @@ def main():
   if platform == 'Windows':
     print('Windows detected...')
     app_path = r"C:/Program Files/Sublime Text 3/subl.exe"
-    config_path = '%APPDATA%\Sublime Text 3'
+    config_path = os.getenv('APPDATA') + '/Sublime Text 3'
     if not is_installed(app_path):
       print('Sublime not installed...')
       install_windows(app_path)
