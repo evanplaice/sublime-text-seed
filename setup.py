@@ -45,10 +45,8 @@ def main():
   # - copy configuration to '%APPDATA%\Sublime Text 3'
   if platform == 'Windows':
     print('Windows detected...')
-    # TODO: do a windows install to determine the default install location
-    # app_path = ''
-    # TODO: do a windows install to determine the default config location
-    # config_path = ''
+    app_path = r"C:/Program Files/Sublime Text 3/subl.exe"
+    config_path = '%APPDATA%\Sublime Text 3'
     if not is_installed(app_path):
       print('Sublime not installed...')
       install_windows(app_path)
