@@ -61,7 +61,10 @@ def main():
 def is_installed(app_path):
   try:
     p = subprocess.Popen(app_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    os.kill(p.pid, signal.SIGTERM)
+    if platform == 'Windows':
+      subprocess.call(['taskkill', '/F', '/T', '/IM', 'sublime_text.exe'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    else:
+      os.kill(p.pid, signal.SIGTERM)
     return True
   except OSError as e:
     return False
