@@ -1,5 +1,3 @@
-**NOTICE: Windows support is currently WIP (work-in-progress)**
-
 # Sublime Text Seed
 
 Automated installation + configuration of Sublime Text in OSX, Linux, and Windows.
