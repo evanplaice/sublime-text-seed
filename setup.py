@@ -97,7 +97,8 @@ def install_windows(app_path):
   try:
     if not Helpers.is_installed(['chocolatey']):
       raise NotInstalledError('Error: Chocolatey required to install Sublime Text.')
-    p = subprocess.Popen(['choco', 'install', '-y', 'sublimetext3'])
+    p = subprocess.Popen(['choco', 'install', '-y', 'sublimetext3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print('Installation complete...')
   except OSError as e:
     print(e)
     sys.exit(1)
