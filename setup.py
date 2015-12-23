@@ -187,8 +187,19 @@ def install_windows(app_path):
 
 # Windows configuration instructions
 def config_windows(config_path):
-  # TODO: implement Windows config
-  return
+  packages = config_path + '/Installed Packages'
+  settings = config_path + '/Packages/User'
+  # create the settings directories
+  make_dir(config_path)
+  make_dir(packages)
+  make_dir(settings)
+  # install 'Package Control'
+  install_package_control(config_path)
+  # copy the themes
+  copytree('./themes', packages)
+  # copy the user preferences
+  copytree('./user-settings', settings)
+  print('Configuration complete...')
 
 # Custom exception, indicates that a dependency is not installed
 class NotInstalledError(Exception):
