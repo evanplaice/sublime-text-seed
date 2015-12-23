@@ -26,7 +26,7 @@ def main():
     if not is_installed(app_path):
       print('Sublime not installed...')
       install_osx(app_path)
-    config_osx(config_path)
+    config(config_path)
     sys.exit(0)
   # Linux Setup:
   # - check and install via `apt-get`
@@ -38,7 +38,7 @@ def main():
     if not is_installed(app_path):
       print('Sublime not installed...')
       install_linux(app_path)
-    config_linux(config_path)
+    config(config_path)
     sys.exit(0)
   # Windows Setup:
   # - check and notify user to install
@@ -50,7 +50,7 @@ def main():
     if not is_installed(app_path):
       print('Sublime not installed...')
       install_windows(app_path)
-    config_windows(config_path)
+    config(config_path)
     sys.exit(0)
   else:
     raise Exception('Operating system not supported');
@@ -125,23 +125,6 @@ def install_osx(app_path):
     sys.exit(1)
 
 
-# OSX configuration instructions
-def config_osx(config_path):
-  packages = config_path + '/Installed Packages'
-  settings = config_path + '/Packages/User'
-  # create the settings directories
-  make_dir(config_path)
-  make_dir(packages)
-  make_dir(settings)
-  # install 'Package Control'
-  install_package_control(config_path)
-  # copy the themes
-  copytree('./themes', packages)
-  # copy the user preferences
-  copytree('./user-settings', settings)
-  print('Configuration complete...')
-
-
 # Linux installation instructions
 def install_linux(app_path):
   try:
@@ -156,23 +139,6 @@ def install_linux(app_path):
     sys.exit(1)
 
 
-# Linux configuration instructions
-def config_linux(config_path):
-  packages = config_path + '/Installed Packages'
-  settings = config_path + '/Packages/User'
-  # create the settings directories
-  make_dir(config_path)
-  make_dir(packages)
-  make_dir(settings)
-  # install 'Package Control'
-  install_package_control(config_path)
-  # copy the themes
-  copytree('./themes', packages)
-  # copy the user preferences
-  copytree('./user-settings', settings)
-  print('Configuration complete...')
-
-
 # Windows installation instructions
 def install_windows(app_path):
   print('Installing Sublime')
@@ -185,8 +151,8 @@ def install_windows(app_path):
     sys.exit(1)
 
 
-# Windows configuration instructions
-def config_windows(config_path):
+# configuration instructions
+def config(config_path):
   packages = config_path + '/Installed Packages'
   settings = config_path + '/Packages/User'
   # create the settings directories
@@ -200,6 +166,7 @@ def config_windows(config_path):
   # copy the user preferences
   copytree('./user-settings', settings)
   print('Configuration complete...')
+
 
 # Custom exception, indicates that a dependency is not installed
 class NotInstalledError(Exception):
