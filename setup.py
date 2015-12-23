@@ -23,7 +23,7 @@ def main():
     print('OSX detected')
     app_path = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'
     config_path = os.path.expanduser('~') + '/Library/Application Support/Sublime Text 3'
-    if not is_installed(app_path):
+    if not Helpers.is_installed(app_path):
       print('Sublime not installed...')
       install_osx(app_path)
     config(config_path)
@@ -35,7 +35,7 @@ def main():
     print('Linux detected...')
     app_path = 'sublime'
     config_path = os.path.expanduser('~') + '/.config/sublime-text-3'
-    if not is_installed(app_path):
+    if not Helpers.is_installed(app_path):
       print('Sublime not installed...')
       install_linux(app_path)
     config(config_path)
@@ -47,7 +47,7 @@ def main():
     print('Windows detected...')
     app_path = r"C:/Program Files/Sublime Text 3/subl.exe"
     config_path = os.getenv('APPDATA') + '/Sublime Text 3'
-    if not is_installed(app_path):
+    if not Helpers.is_installed(app_path):
       print('Sublime not installed...')
       install_windows(app_path)
     config(config_path)
@@ -57,58 +57,11 @@ def main():
     sys.exit(1)
 
 
-# Check to see if an application is installed
-def is_installed(app_path):
-  try:
-    p = subprocess.Popen(app_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    os.kill(p.pid, signal.SIGTERM)
-    return True
-  except OSError as e:
-    return False
-
-
-# create a directory if it doesn't already exist
-def make_dir(dir):
-  try:
-    os.makedirs(dir)
-  # capture any non-file-creation errors
-  except OSError as exception:
-    if exception.errno != errno.EEXIST:
-      raise
-
-
-# recursively copies all the files in a directory
-#  required because shutil.copytree (sucks) can't overwrite directories
-def copytree(src, dst, symlinks=False, ignore=None):
-  for item in os.listdir(src):
-    s = os.path.join(src, item)
-    d = os.path.join(dst, item)
-    if os.path.isdir(s):
-      try:
-        shutil.copytree(s, d, symlinks, ignore)
-      except OSError as exception:
-        if exception.errno != errno.EEXIST:
-          raise
-    else:
-      shutil.copy2(s, d)
-
-
-def install_package_control(config_path):
-  path = config_path + '/Installed Packages/Package Control.sublime-package'
-  url = 'http://sublime.wbond.net/Package%20Control.sublime-package'
-  response = urllib2.urlopen(url)
-  CHUNK = 16 * 1024
-  with open(path, 'wb') as f:
-   while True:
-      chunk = response.read(CHUNK)
-      if not chunk: break
-      f.write(chunk)
-
 # OSX installation instructions
 def install_osx(app_path):
   install_path = '/opt/homebrew-cask/Caskroom/sublime-text3/build 3083/Sublime Text.app/Contents/SharedSupport/bin/subl'
   try:
-    if not is_installed(['brew', 'help', '&>/dev/null']):
+    if not Helpers.is_installed(['brew', 'help', '&>/dev/null']):
       raise NotInstalledError('Error: Homebrew required to install Sublime Text.')
     print('Updating sources...')
     subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
@@ -142,7 +95,7 @@ def install_linux(app_path):
 def install_windows(app_path):
   print('Installing Sublime')
   try:
-    if not is_installed(['chocolatey']):
+    if not Helpers.is_installed(['chocolatey']):
       raise NotInstalledError('Error: Chocolatey required to install Sublime Text.')
     p = subprocess.Popen(['choco', 'install', '-y', 'sublimetext3'])
   except OSError as e:
@@ -155,17 +108,66 @@ def config(config_path):
   packages = config_path + '/Installed Packages'
   settings = config_path + '/Packages/User'
   # create the settings directories
-  make_dir(config_path)
-  make_dir(packages)
-  make_dir(settings)
+  Helpers.make_dir(config_path)
+  Helpers.make_dir(packages)
+  Helpers.make_dir(settings)
   # install 'Package Control'
-  install_package_control(config_path)
+  Helpers.install_package_control(config_path)
   # copy the themes
-  copytree('./themes', packages)
+  Helpers.copytree('./themes', packages)
   # copy the user preferences
-  copytree('./user-settings', settings)
+  Helpers.copytree('./user-settings', settings)
   print('Configuration complete...')
 
+
+# A class containting static helper methods used to perform the install + config
+class Helpers():
+  # Check to see if an application is installed
+  @staticmethod
+  def is_installed(app_path):
+    try:
+      p = subprocess.Popen(app_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      os.kill(p.pid, signal.SIGTERM)
+      return True
+    except OSError as e:
+      return False
+
+  # create a directory if it doesn't already exist
+  @staticmethod
+  def make_dir(dir):
+    try:
+      os.makedirs(dir)
+    # capture any non-file-creation errors
+    except OSError as exception:
+      if exception.errno != errno.EEXIST:
+        raise
+
+  # recursively copies all the files in a directory
+  #  required because shutil.copytree (sucks) can't overwrite directories
+  @staticmethod
+  def copytree(src, dst, symlinks=False, ignore=None):
+    for item in os.listdir(src):
+      s = os.path.join(src, item)
+      d = os.path.join(dst, item)
+      if os.path.isdir(s):
+        try:
+          shutil.copytree(s, d, symlinks, ignore)
+        except OSError as exception:
+          if exception.errno != errno.EEXIST:
+            raise
+      else:
+        shutil.copy2(s, d)
+  @staticmethod
+  def install_package_control(config_path):
+    path = config_path + '/Installed Packages/Package Control.sublime-package'
+    url = 'http://sublime.wbond.net/Package%20Control.sublime-package'
+    response = urllib2.urlopen(url)
+    CHUNK = 16 * 1024
+    with open(path, 'wb') as f:
+     while True:
+        chunk = response.read(CHUNK)
+        if not chunk: break
+        f.write(chunk)
 
 # Custom exception, indicates that a dependency is not installed
 class NotInstalledError(Exception):
