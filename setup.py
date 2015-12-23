@@ -67,8 +67,8 @@ def install_osx(app_path):
     subprocess.call(['brew', 'update'], stdout=subprocess.PIPE)
     print('Installing Sublime Text...')
     os.environ['HOMEBREW_CASK_OPTS'] = '--appdir=/Applications'
-    subprocess.call(['brew', 'tap', 'caskroom/versions'])
-    subprocess.call(['brew', 'cask', 'install', 'sublime-text3'])
+    subprocess.call(['brew', 'tap', 'caskroom/versions'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    subprocess.call(['brew', 'cask', 'install', 'sublime-text3'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     # symlink to 'sublime'
     subprocess.Popen(['ln', '-s', install_path, '/usr/local/bin/sublime'])
     print('Installation complete...')
@@ -82,9 +82,9 @@ def install_linux(app_path):
   try:
     subprocess.call(['sudo', 'id', '-nu'], stdout=subprocess.PIPE)
     print('Updating sources...')
-    subprocess.call(['sudo', 'apt-get', 'update'], stdout=subprocess.PIPE)
+    subprocess.call(['sudo', 'apt-get', 'update'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print('Installing Sublime Text...')
-    subprocess.call(['sudo', 'apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE)
+    subprocess.call(['sudo', 'apt-get', 'install', 'sublime-text'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print('Installation complete...')
   except OSError as e:
     print(e)
@@ -168,6 +168,7 @@ class Helpers():
         chunk = response.read(CHUNK)
         if not chunk: break
         f.write(chunk)
+
 
 # Custom exception, indicates that a dependency is not installed
 class NotInstalledError(Exception):
