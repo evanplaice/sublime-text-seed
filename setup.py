@@ -161,7 +161,7 @@ class Helpers():
   @staticmethod
   def install_package_control(config_path):
     path = config_path + '/Installed Packages/Package Control.sublime-package'
-    url = 'http://sublime.wbond.net/Package%20Control.sublime-package'
+    url = 'ttps://packagecontrol.io/Package%20Control.sublime-package'
     response = urllib2.urlopen(url)
     CHUNK = 16 * 1024
     with open(path, 'wb') as f:
